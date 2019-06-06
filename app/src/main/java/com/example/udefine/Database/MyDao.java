@@ -29,11 +29,11 @@ public interface MyDao {
 
     //----------搜尋---------//
     /*Note*/
-    @Query("select * from NoteList")
-    NoteList[] getNoteList();
+    //@Query("select * from NoteList") //被livedata取代
+    //NoteList[] getNoteList();
 
-    @Query("select * from Notes")
-    Notes[] getNotes();
+    //@Query("select * from Notes") //被livedata取代
+    //Notes[] getNotes();
 
     @Query("SELECT * from NoteList ORDER BY NoteID ASC")
     LiveData<List<NoteList>> getAllNoteList();
