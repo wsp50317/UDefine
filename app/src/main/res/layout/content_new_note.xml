@@ -50,14 +50,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/save_button"/>
+            android:text="@string/save_button"
+            android:onClick="saveNote"/>
 
         <Button
             android:id="@+id/new_note_cancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/cancel_button" />
+            android:text="@string/cancel_button"
+            android:onClick="cancelNote"/>
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
