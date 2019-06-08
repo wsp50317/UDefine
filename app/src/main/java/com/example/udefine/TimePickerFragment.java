@@ -13,6 +13,7 @@ import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
@@ -27,9 +28,12 @@ public class TimePickerFragment extends DialogFragment
 
     private int hour, minute;
     private boolean set = false;
+    private Button mButton;
 
-    public TimePickerFragment(String timeString) {
-        if (timeString != null) {
+    public TimePickerFragment(View view) {
+        mButton = (Button) view;
+        String timeString = mButton.getText().toString();
+        if (!timeString.equals("Time")) {
             String spl[]=timeString.split(":");
             hour = Integer.parseInt(spl[0]);
             minute = Integer.parseInt(spl[1]);
@@ -56,7 +60,9 @@ public class TimePickerFragment extends DialogFragment
 
     @Override
     public void onTimeSet(TimePicker timePicker, int hour, int minute) {
-        NewNote activity = (NewNote) getActivity();
-        activity.processTimePickerResult(hour, minute);
+        String hour_string = Integer.toString(hour);
+        String minute_string = Integer.toString(minute);
+        String mTime = hour_string + ":" + minute_string;
+        mButton.setText(mTime);
     }
 }

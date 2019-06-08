@@ -7,22 +7,26 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 public class NewNote extends AppCompatActivity {
+    private widgetManager widgetsManager;
 
-    private Spinner mSpinner;
-    private String mDate, mTime;
-    private Button mDateButton, mTimeButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,37 +35,20 @@ public class NewNote extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        mDateButton = findViewById(R.id.dateButton);
-        mTimeButton = findViewById(R.id.timeButton);
-
-        // tag spinner settings
-        final String[] tag_colors = {
-                "Select Tag", "#00ff00", "#ffff00", "#ff751a", "#ff0000",
-                "#993399", "#6666ff"};
-        mSpinner = findViewById(R.id.tag_spinner);
-
-        ArrayList<tagItemStateVO> listVOs = new ArrayList<>();
-
-        for (int i = 0; i < tag_colors.length; i++) {
-            tagItemStateVO stateVO = new tagItemStateVO();
-            stateVO.setTitle(tag_colors[i]);
-            stateVO.setSelected(false);
-            listVOs.add(stateVO);
-        }
-        tagListAdapter myAdapter = new tagListAdapter(NewNote.this, 0,
-                listVOs);
-        mSpinner.setAdapter(myAdapter);
-
+        // TODO: grab layout component ID from DB
         /*
-         *  1. load selected layout
-         *     - load default layout
-         *     - TextView - title
-         *     - Widget
-         *  2. buttons
-         *     - save
-         *     - cancel
+         *  widget type:
+         *  1. Title + editText
+         *  2. Title + Date/Time Picker
+         *  3. Title + Tag
+         *  4. Title + PlainText
          */
-
+        // component_list should be a layout class with title name
+        int component_list[] = {1, 2, 3, 4, 2, 3};
+        LinearLayout parentLinear = findViewById(R.id.newNoteLayout);
+        widgetsManager = new widgetManager(this, parentLinear,
+                                                         getSupportFragmentManager());
+        widgetsManager.generate(component_list);
     }
 
     @Override
@@ -78,32 +65,4 @@ public class NewNote extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
-    public void processDatePickerResult(int year, int month, int day) {
-        String month_string = Integer.toString(month+1);
-        String day_string = Integer.toString(day);
-        String year_string = Integer.toString(year);
-        mDate = month_string +
-                "/" + day_string + "/" + year_string;
-        mDateButton.setText(mDate);
-    }
-
-    public void processTimePickerResult(int hour, int minute) {
-        String hour_string = Integer.toString(hour);
-        String minute_string = Integer.toString(minute);
-        mTime = hour_string + ":" + minute_string;
-        mTimeButton.setText(mTime);
-    }
-
-    public void datePicker(View view) {
-        DialogFragment newFragment = new DatePickerFragment(mDate);
-        newFragment.show(getSupportFragmentManager(),"datePicker");
-    }
-
-    public void timePicker(View view) {
-        DialogFragment newFragment = new TimePickerFragment(mTime);
-        newFragment.show(getSupportFragmentManager(),"timePicker");
-    }
-
-
 }

@@ -3,6 +3,7 @@ package com.example.udefine;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +26,10 @@ public class tagListAdapter extends ArrayAdapter<tagItemStateVO> {
         this.mContext = context;
         this.listState = (ArrayList<tagItemStateVO>) objects;
         this.myAdapter = this;
+    }
+
+    public ArrayList<tagItemStateVO> getSelectedItems() {
+        return listState;
     }
 
     @Override
@@ -81,6 +86,7 @@ public class tagListAdapter extends ArrayAdapter<tagItemStateVO> {
 
                 if (!isFromView) {
                     listState.get(position).setSelected(isChecked);
+
                 }
             }
         });

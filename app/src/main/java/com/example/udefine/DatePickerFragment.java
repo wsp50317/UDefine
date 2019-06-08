@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TextView;
 
@@ -26,10 +27,13 @@ public class DatePickerFragment extends DialogFragment
 
     private int year, month, day;
     private boolean set = false;
+    private Button mButton;
 
     @SuppressLint("ValidFragment")
-    public DatePickerFragment (String dateString) {
-        if (dateString != null) {
+    public DatePickerFragment (View view) {
+        mButton = (Button) view;
+        String dateString = mButton.getText().toString();
+        if (!dateString.equals("Date")) {
             String spl[]=dateString.split("/");
             month = Integer.parseInt(spl[0]) - 1;
             day = Integer.parseInt(spl[1]);
@@ -57,7 +61,11 @@ public class DatePickerFragment extends DialogFragment
 
     @Override
     public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-        NewNote activity = (NewNote) getActivity();
-        activity.processDatePickerResult(year, month, day);
+        String month_string = Integer.toString(month+1);
+        String day_string = Integer.toString(day);
+        String year_string = Integer.toString(year);
+        String mDate = month_string +
+                "/" + day_string + "/" + year_string;
+        mButton.setText(mDate);
     }
 }
