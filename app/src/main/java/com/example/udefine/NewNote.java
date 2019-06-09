@@ -45,10 +45,11 @@ public class NewNote extends AppCompatActivity {
          */
         // component_list should be a layout class with title name
         int component_list[] = {1, 2, 3, 4, 2, 3};
+        String component_title[] = {"?", "??", "???", "", "????", "?????"};
         LinearLayout parentLinear = findViewById(R.id.newNoteLayout);
         widgetsManager = new widgetManager(this, parentLinear,
                                                          getSupportFragmentManager());
-        widgetsManager.generate(component_list);
+        widgetsManager.generate(component_list, component_title);
     }
 
     @Override
