@@ -1,6 +1,8 @@
 package com.example.udefine;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
@@ -26,6 +28,10 @@ public class NoteListAdapter extends
 
     // for adapter context
     private Context context;
+
+    // to EditNote intent
+    public static final String EDIT_NOTE_ID =
+            "com.example.android.udefine.extra.EDITNOTEID";
 
     // flag for delete mode, false for disable, true for enable
     private boolean del_flag = false;
@@ -104,6 +110,11 @@ public class NoteListAdapter extends
                     if (del_flag) {
                         delete_note[getAdapterPosition()] = !delete_note[getAdapterPosition()];
                         notifyDataSetChanged();
+                    } else {
+                        Intent intent = new Intent(context, EditNote.class);
+                        // send note ID to EditNote Activity
+                        intent.putExtra(EDIT_NOTE_ID, 1);
+                        context.startActivity(intent);
                     }
                 }
             });
