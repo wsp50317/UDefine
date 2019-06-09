@@ -4,21 +4,29 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 public class NewNote extends AppCompatActivity {
+    private widgetManager widgetsManager;
 
-    private Spinner mSpinner;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,34 +35,20 @@ public class NewNote extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        // tag spinner settings
-        final String[] tag_colors = {
-                "Select Tag", "#00ff00", "#ffff00", "#ff751a", "#ff0000",
-                "#993399", "#6666ff"};
-        mSpinner = findViewById(R.id.tag_spinner);
-
-        ArrayList<tagItemStateVO> listVOs = new ArrayList<>();
-
-        for (int i = 0; i < tag_colors.length; i++) {
-            tagItemStateVO stateVO = new tagItemStateVO();
-            stateVO.setTitle(tag_colors[i]);
-            stateVO.setSelected(false);
-            listVOs.add(stateVO);
-        }
-        tagListAdapter myAdapter = new tagListAdapter(NewNote.this, 0,
-                listVOs);
-        mSpinner.setAdapter(myAdapter);
-
+        // TODO: grab layout component ID from DB
         /*
-         *  1. load selected layout
-         *     - load default layout
-         *     - TextView - title
-         *     - Widget
-         *  2. buttons
-         *     - save
-         *     - cancel
+         *  widget type:
+         *  1. Title + editText
+         *  2. Title + Date/Time Picker
+         *  3. Title + Tag
+         *  4. Title + PlainText
          */
-
+        // component_list should be a layout class with title name
+        int component_list[] = {1, 2, 3, 4, 2, 3};
+        LinearLayout parentLinear = findViewById(R.id.newNoteLayout);
+        widgetsManager = new widgetManager(this, parentLinear,
+                                                         getSupportFragmentManager());
+        widgetsManager.generate(component_list);
     }
 
     @Override
@@ -72,9 +66,15 @@ public class NewNote extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void datePicker(View view) {
+    public void saveNote(View view) {
+        widgetsManager.getLayoutValue();
+        // TODO: Store to DB
+        Intent intent = new Intent(NewNote.this, MainActivity.class);
+        startActivity(intent);
     }
 
-    public void timePicker(View view) {
+    public void cancelNote(View view) {
+        Intent intent = new Intent(NewNote.this, MainActivity.class);
+        startActivity(intent);
     }
 }
