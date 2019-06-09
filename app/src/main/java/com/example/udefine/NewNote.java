@@ -69,12 +69,10 @@ public class NewNote extends AppCompatActivity {
     public void saveNote(View view) {
         widgetsManager.getLayoutValue();
         // TODO: Store to DB
-        Intent intent = new Intent(NewNote.this, MainActivity.class);
-        startActivity(intent);
+        finish();
     }
 
     public void cancelNote(View view) {
-        Intent intent = new Intent(NewNote.this, MainActivity.class);
-        startActivity(intent);
+        finish();
     }
 }
