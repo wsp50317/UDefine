@@ -55,7 +55,4 @@ public class LayoutElement extends AppCompatActivity {
             }
         });
     }
-
-    public void element_preview(View view) {
-    }
 }
