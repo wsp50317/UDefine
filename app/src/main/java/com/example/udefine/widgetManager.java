@@ -87,6 +87,35 @@ public class widgetManager {
         }
     }
 
+    // widget.generate for multiple element with Arraylist<String> type
+    public void generate(int componentList[], ArrayList<String> title) {
+
+        // make sure one element with one title name
+        if (componentList.length != title.size())
+            return;
+
+        for (int i = 0; i < componentList.length; ++i) {
+            switch (componentList[i]) {
+                case 1:
+                    /* Add editText */
+                    this.addEditText(title.get(i));
+                    break;
+                case 2:
+                    /* Add DateTime */
+                    this.addDateTime(title.get(i));
+                    break;
+                case 3:
+                    /* Add Tag */
+                    this.addTag(title.get(i));
+                    break;
+                case 4:
+                    /* Add PlainText */
+                    this.addPlainText(title.get(i));
+                    break;
+            }
+        }
+    }
+
     public void getLayoutValue() {
         int id;
         String title;
