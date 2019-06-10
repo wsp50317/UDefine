@@ -2,6 +2,7 @@ package com.example.udefine;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
 import android.text.InputType;
@@ -133,12 +134,12 @@ public class widgetManager {
         TextView titleTextView = new TextView(mainContext);
         titleTextView.setTextSize(24);
         titleTextView.setText(title);
+        titleTextView.setTypeface(titleTextView.getTypeface(), Typeface.BOLD);
 
         /* EditText */
         EditText editText = new EditText(mainContext);
         editText.setTextSize(18);
         editText.setInputType(InputType.TYPE_CLASS_TEXT);
-        editText.setText(title);
         editText.setId(View.generateViewId());
 
         /* Add element to child layout */
@@ -175,6 +176,7 @@ public class widgetManager {
         TextView titleTextView = new TextView(mainContext);
         titleTextView.setTextSize(24);
         titleTextView.setText(title);
+        titleTextView.setTypeface(titleTextView.getTypeface(), Typeface.BOLD);
 
         /* buttons layout setting */
         LinearLayout.LayoutParams buttonLayoutParams = new LinearLayout.LayoutParams(
@@ -235,6 +237,7 @@ public class widgetManager {
         TextView titleTextView = new TextView(mainContext);
         titleTextView.setTextSize(24);
         titleTextView.setText(title);
+        titleTextView.setTypeface(titleTextView.getTypeface(), Typeface.BOLD);
 
         /* spinner layout setting */
         LinearLayout.LayoutParams spinnerLayoutParams = new LinearLayout.LayoutParams(
@@ -285,6 +288,7 @@ public class widgetManager {
         TextView titleTextView = new TextView(mainContext);
         titleTextView.setTextSize(24);
         titleTextView.setText(title);
+        titleTextView.setTypeface(titleTextView.getTypeface(), Typeface.BOLD);
 
         /* EditText */
         EditText editText = new EditText(mainContext);
@@ -292,7 +296,6 @@ public class widgetManager {
         editText.setInputType(InputType.TYPE_CLASS_TEXT |
                               InputType.TYPE_TEXT_FLAG_MULTI_LINE);
         editText.setMinLines(3);
-        editText.setText(title);
         editText.setId(View.generateViewId());
 
         /* Add element to child layout */
