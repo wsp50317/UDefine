@@ -20,6 +20,27 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_layout_element" />
+    <include
+        android:id="@+id/include3"
+        layout="@layout/content_layout_element" />
+
+    <Button
+        android:id="@+id/layout_element_save_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:text="@string/save_button"
+        android:onClick="save_element"
+        app:layout_anchor="@+id/include3"
+        app:layout_anchorGravity="left|bottom" />
+
+    <Button
+        android:id="@+id/layout_element_cancel_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:text="@string/cancel_button"
+        app:layout_anchor="@+id/include3"
+        app:layout_anchorGravity="right|bottom" />
 
 </android.support.design.widget.CoordinatorLayout>
