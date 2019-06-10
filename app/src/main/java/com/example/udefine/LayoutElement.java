@@ -11,11 +11,13 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 public class LayoutElement extends AppCompatActivity {
     private widgetManager widgetsManager;
     private LinearLayout mElementPreview;
     private Spinner mElementSpinner;
+    private TextView mWidgetTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +30,7 @@ public class LayoutElement extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         mElementPreview = findViewById(R.id.element_preview);
+        mWidgetTitle = findViewById(R.id.element_title);
 
         // attach adapter to widget type spinner
         mElementSpinner = findViewById(R.id.widget_type_spinner);
@@ -40,13 +43,14 @@ public class LayoutElement extends AppCompatActivity {
         mElementSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
                 mElementPreview.removeAllViews();
+
                 mElementPreview.setBackground(getResources().getDrawable(R.drawable.note_list_layout));
-                int component_list[] = new int[1];
-                component_list[0] = position + 1;
                 widgetsManager = new widgetManager(LayoutElement.this, mElementPreview,
                         getSupportFragmentManager());
-                widgetsManager.generate(component_list);
+
+                widgetsManager.generate(position + 1, mWidgetTitle.getText().toString());
             }
 
             @Override

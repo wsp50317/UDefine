@@ -38,10 +38,11 @@ public class EditNote extends AppCompatActivity {
          */
         // component_list should be a layout class with title name
         int component_list[] = {1, 2, 3};
+        String component_title[] = {"test1", "ohohoh", "???"};
         LinearLayout parentLinear = findViewById(R.id.editNoteLayout);
         widgetsManager = new widgetManager(this, parentLinear,
                 getSupportFragmentManager());
-        widgetsManager.generate(component_list);
+        widgetsManager.generate(component_list, component_title);
     }
 
     @Override

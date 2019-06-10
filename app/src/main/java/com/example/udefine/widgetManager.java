@@ -35,24 +35,52 @@ public class widgetManager {
                 .getDisplayMetrics().density);
     }
 
-    public void generate(int componentList[]) {
+    // widget.generate for one element
+    public void generate(int widget_type, String title) {
+        switch (widget_type) {
+            case 1:
+                /* Add editText */
+                this.addEditText(title);
+                break;
+            case 2:
+                /* Add DateTime */
+                this.addDateTime(title);
+                break;
+            case 3:
+                /* Add Tag */
+                this.addTag(title);
+                break;
+            case 4:
+                /* Add PlainText */
+                this.addPlainText(title);
+                break;
+        }
+    }
+
+    // widget.generate for multiple element
+    public void generate(int componentList[], String[] title) {
+
+        // make sure one element with one title name
+        if (componentList.length != title.length)
+            return;
+
         for (int i = 0; i < componentList.length; ++i) {
             switch (componentList[i]) {
                 case 1:
                     /* Add editText */
-                    this.addEditText("Edit");
+                    this.addEditText(title[i]);
                     break;
                 case 2:
                     /* Add DateTime */
-                    this.addDateTime("Time");
+                    this.addDateTime(title[i]);
                     break;
                 case 3:
                     /* Add Tag */
-                    this.addTag("Tag");
+                    this.addTag(title[i]);
                     break;
                 case 4:
                     /* Add PlainText */
-                    this.addPlainText("Multi-line");
+                    this.addPlainText(title[i]);
                     break;
             }
         }
