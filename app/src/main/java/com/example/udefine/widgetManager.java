@@ -88,14 +88,14 @@ public class widgetManager {
     }
 
     // widget.generate for multiple element with Arraylist<String> type
-    public void generate(int componentList[], ArrayList<String> title) {
+    public void generate(ArrayList<Integer> componentList, ArrayList<String> title) {
 
         // make sure one element with one title name
-        if (componentList.length != title.size())
+        if (componentList.size() != title.size())
             return;
 
-        for (int i = 0; i < componentList.length; ++i) {
-            switch (componentList[i]) {
+        for (int i = 0; i < componentList.size(); ++i) {
+            switch (componentList.get(i)) {
                 case 1:
                     /* Add editText */
                     this.addEditText(title.get(i));
