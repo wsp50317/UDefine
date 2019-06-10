@@ -1,6 +1,7 @@
 package com.example.udefine;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -13,17 +14,27 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 public class LayoutElement extends AppCompatActivity {
     private widgetManager widgetsManager;
     private LinearLayout mElementPreview;
     private Spinner mElementSpinner;
     private TextView mWidgetTitle;
+    private ArrayList<Integer> component_list = new ArrayList<Integer>();
+    private ArrayList<String> component_title = new ArrayList<String>();
+    public static final String component_list_passing_key = "COMPONENT_LIST_KEY";
+    public static final String component_title_passing_key = "COMPONENT_TITLE_KEY";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_layout_element);
 
+        // Intent setting
+        Intent intent = getIntent();
+        component_list = intent.getIntegerArrayListExtra(component_list_passing_key);
+        component_title = intent.getStringArrayListExtra(component_title_passing_key);
 
         // toolbar setting
         Toolbar toolbar = findViewById(R.id.layout_element_toolbar);
@@ -58,5 +69,21 @@ public class LayoutElement extends AppCompatActivity {
 
             }
         });
+    }
+
+    public void save_element(View view) {
+
+        component_list.add(mElementSpinner.getSelectedItemPosition() + 1);
+        component_title.add(mWidgetTitle.getText().toString());
+
+        Bundle bundle = new Bundle();
+        bundle.putIntegerArrayList(component_list_passing_key, component_list);
+        bundle.putStringArrayList(component_title_passing_key, component_title);
+
+        Intent intent = new Intent(LayoutElement.this, NewLayout.class);
+        intent.putExtras(bundle);
+
+        setResult(RESULT_OK, intent);
+        finish();
     }
 }
