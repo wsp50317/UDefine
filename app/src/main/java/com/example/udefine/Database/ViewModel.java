@@ -5,6 +5,7 @@ import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
 import android.support.annotation.NonNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ViewModel extends AndroidViewModel {
@@ -39,13 +40,41 @@ public class ViewModel extends AndroidViewModel {
         mRepository.insertNote(notes);
     }
 
+    public void insertNoteList(NoteList noteList){
+        mRepository.insertNotelist(noteList);
+    }
+
+    /***
+     * 用來輸入一筆note中的所有欄位
+     * 每個欄位即是一個Notes
+     */
+    public void insertNotes(ArrayList<Notes> notes){
+        for(Notes note:notes){
+            mRepository.insertNote(note);
+        }
+    }
+
     public void insertLayout(LayoutList layoutList,Layouts layouts){
         mRepository.insertLayoutlist(layoutList);
         mRepository.insertLayouts(layouts);
     }
 
+    public void inserLayoutList(LayoutList layoutList){
+        mRepository.insertLayoutlist(layoutList);
+    }
+
+    public void insertLayouts(ArrayList<Layouts> layouts){
+        for(Layouts layout:layouts){
+            mRepository.insertLayouts(layout);
+        }
+    }
+
     public int getLastNoteID(){
         return mRepository.getLastNoteID();
+    }
+
+    public int getLastLayoutID(){
+        return mRepository.getLastLayoutID();
     }
 
     public int getNumberofNote(){

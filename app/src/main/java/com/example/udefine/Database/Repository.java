@@ -15,6 +15,7 @@ public class Repository {
     private LiveData<List<Layouts>> mLayouts;
 
     private int mLastNoteID;
+    private int mLastLayoutID;
     private int mNumberOfNotes;
 
     Repository(Application application) {
@@ -23,6 +24,7 @@ public class Repository {
 
         /*Get live data*/
         mLastNoteID = mMyDao.getLastNoteID();
+        mLastLayoutID = mMyDao.getLastLayoutListID();
         mNoteList = mMyDao.getAllNoteList();
         mLayoutList = mMyDao.getAllLayoutList();
         mNotes = mMyDao.getAllNotes();
@@ -31,6 +33,8 @@ public class Repository {
     }
 
     public int getLastNoteID(){return mLastNoteID;}
+
+    public int getLastLayoutID(){return mLastLayoutID;}
 
     public int getLayoutIDFromNoteID(int noteID){
         return mMyDao.getLayoutIDFromNoteID(noteID);
